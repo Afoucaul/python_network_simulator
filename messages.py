@@ -21,7 +21,7 @@ class Message:
 
     def __init__(self, *args):
         for i, value in enumerate(args):
-            self.__setattr__(self.fields[i].name, value)
+            setattr(self, self.fields[i].name, value)
 
     def __bytes__(self):
         data = "{}".format(type(self).__name__)
@@ -48,7 +48,8 @@ class Message:
         else:
             messageObject = messageType()
             for i, value in enumerate(splitted[1:]):
-                messageObject.__setattr__(
+                setattr(
+                    messageObject,
                     messageType.fields[i].name,
                     messageType.fields[i].expand(value))
 
